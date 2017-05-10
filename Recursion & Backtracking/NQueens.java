@@ -1,5 +1,5 @@
 import java.util.*;
-import java.util.concurrent.TimeUnit;
+import Helpers.Timer;
 
 class NQueens {
 
@@ -87,14 +87,12 @@ class NQueens {
 
     int[][] board = new int[N][N];
 
-    long startTime = System.nanoTime();
+    Timer timer = new Timer();
+    timer.start();
     boolean hasSolution = NQueens(board, N);
-    long endTime = System.nanoTime();
+    timer.stop();
 
-    double durationInMs = (endTime - startTime) / 1000000.0;
-    System.out.println();
-    System.out.println("Time: " + durationInMs + " ms");
-    System.out.println();
+    timer.printDuration();
 
     if (hasSolution) {
       System.out.println("YES");
