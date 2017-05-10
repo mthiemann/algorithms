@@ -7,6 +7,7 @@ Solutions are programmed in Java. Later, C++ solutions might be added.
 
 ## Sorting
 - [SelectionSort](Sorting/SelectionSort.java)
+- [BubbleSort](Sorting/BubbleSort.java)
 - [InsertionSort](Sorting/InsertionSort.java)
 - [MergeSort](Sorting/MergeSort.java)
 
