@@ -5,4 +5,5 @@ A collection of personally programmed algorithms for quick lookup and reuse
 - [NQueens](Recursion%20%26%20Backtracking/NQueens.java)
 
 ## Sorting
+- [InsertionSort](Sorting/InsertionSort.java)
 - [MergeSort](Sorting/MergeSort.java)
