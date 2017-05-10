@@ -1,5 +1,5 @@
-import java.util.*;
-import Helpers.Timer;
+import java.util.Scanner;
+import Helpers.*;
 
 
 class MergeSort {
@@ -57,8 +57,7 @@ class MergeSort {
     timer.stop();
     timer.printDuration();
 
-    for (int i = 0; i < N; i++) {
-      System.out.print(arr[i] + " ");
-    }
+
+    Printer.print(arr);
   }
 }
