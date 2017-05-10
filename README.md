@@ -6,6 +6,7 @@ Solutions are programmed in Java. Later, C++ solutions might be added.
 - [NQueens](Recursion%20%26%20Backtracking/NQueens.java)
 
 ## Sorting
+- [SelectionSort](Sorting/SelectionSort.java)
 - [InsertionSort](Sorting/InsertionSort.java)
 - [MergeSort](Sorting/MergeSort.java)
 
