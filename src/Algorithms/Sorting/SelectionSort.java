@@ -1,7 +1,7 @@
-package Sorting;
+package Algorithms.Sorting;
 
 import java.util.Scanner;
-import Helpers.*;
+import Algorithms.Helpers.*;
 
 
 public class SelectionSort {

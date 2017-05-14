@@ -1,4 +1,4 @@
-package Helpers;
+package Algorithms.Helpers;
 
 public class Printer {
 

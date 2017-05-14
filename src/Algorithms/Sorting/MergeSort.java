@@ -1,8 +1,10 @@
+package Algorithms.Sorting;
+
 import java.util.Scanner;
-import Helpers.*;
+import Algorithms.Helpers.*;
 
 
-class MergeSort {
+public class MergeSort {
 
   public static void mergeSort(int[] arr) {
     mergeSort(arr, 0, arr.length - 1);

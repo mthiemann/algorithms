@@ -1,7 +1,9 @@
-import java.util.*;
-import Helpers.Timer;
+package Algorithms.RecursionAndBacktracking;
 
-class NQueens {
+import java.util.*;
+import Algorithms.Helpers.Timer;
+
+public class NQueens {
 
   public static boolean isAttacked(int row, int col, int[][] board) {
 

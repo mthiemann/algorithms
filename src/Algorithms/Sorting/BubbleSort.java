@@ -1,6 +1,6 @@
-package Sorting;
+package Algorithms.Sorting;
 
-import Helpers.*;
+import Algorithms.Helpers.*;
 import java.util.Scanner;
 
 public class BubbleSort {
