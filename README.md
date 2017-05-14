@@ -10,19 +10,19 @@ From scratch implementations of common data structures in Java.
 
 Data Structure | Implementation | Test
 --- | --- | ---
-Heap | [Heap.java](src/Heap.java) | [HeapTest.java](tests/HeapTest.java)
+Heap | [Heap.java](src/DataStructures/Heap.java) | [HeapTest.java](tests/DataStructures/HeapTest.java)
 
 
 ## Algorithms
 
 ### Recursion & Backtracking
-- [NQueens](Recursion%20%26%20Backtracking/NQueens.java)
+- [NQueens](src/Algorithms/RecursionAndBacktracking/NQueens.java)
 
 ### Sorting
-- [Selection Sort](Sorting/SelectionSort.java)
-- [Bubble Sort](Sorting/BubbleSort.java)
-- [Insertion Sort](Sorting/InsertionSort.java)
-- [Quick Sort](Sorting/QuickSort.java)
-- [Merge Sort](Sorting/MergeSort.java)
+- [Selection Sort](src/Algorithms/Sorting/SelectionSort.java)
+- [Bubble Sort](src/Algorithms/Sorting/BubbleSort.java)
+- [Insertion Sort](src/Algorithms/Sorting/InsertionSort.java)
+- [Quick Sort](src/Algorithms/Sorting/QuickSort.java)
+- [Merge Sort](src/Algorithms/Sorting/MergeSort.java)
 
 
