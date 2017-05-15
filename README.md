@@ -5,12 +5,12 @@ For some algorithms no test cases are provided because these solutions already r
 
 
 ## Data Structures
-From scratch implementations of common data structures in Java.
+From scratch implementations of common data structures in Java including complexity for operations.
 <br>
 
-Data Structure | Implementation | Test
---- | --- | ---
-Heap | [Heap.java](src/DataStructures/Heap.java) | [HeapTest.java](tests/DataStructures/HeapTest.java)
+Data Structure | Implementation | Test | Add | Access | Delete | Optimized For
+--- | --- | --- | --- | --- | --- | ---
+Heap | [Heap.java](src/DataStructures/Heap.java) | [HeapTest.java](tests/DataStructures/HeapTest.java) | O(log N) | O(N) | O(N) | O(1) Peek <br> max (Max Heap) <br> min (Min Heap)
 
 
 ## Algorithms
