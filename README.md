@@ -22,7 +22,8 @@ Heap | [Heap.java](src/DataStructures/Heap.java) | [HeapTest.java](tests/DataStr
 - [Selection Sort](src/Algorithms/Sorting/SelectionSort.java)
 - [Bubble Sort](src/Algorithms/Sorting/BubbleSort.java)
 - [Insertion Sort](src/Algorithms/Sorting/InsertionSort.java)
-- [Quick Sort](src/Algorithms/Sorting/QuickSort.java)
+- [Heap Sort](src/Algorithms/Sorting/HeapSort.java)
 - [Merge Sort](src/Algorithms/Sorting/MergeSort.java)
+- [Quick Sort](src/Algorithms/Sorting/QuickSort.java)
 
 
