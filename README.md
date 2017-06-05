@@ -11,6 +11,7 @@ From scratch implementations of common data structures in Java including complex
 Data Structure | Implementation | Test | Add | Access | Delete | Optimized For
 --- | --- | --- | --- | --- | --- | ---
 Heap | [Heap.java](src/DataStructures/Heap.java) | [HeapTest.java](tests/DataStructures/HeapTest.java) | O(log N) | O(N) | O(N) | O(1) Peek <br> max (Max Heap) <br> min (Min Heap)
+Stack | [Stack](src/DataStructures/Stack) | [StackTest.java](tests/DataStructures/Stack/StackTest.java) | O(1) | O(N) | O(N) | Get last inserted in O(1)
 
 
 ## Algorithms
