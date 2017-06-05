@@ -1,5 +1,7 @@
 package DataStructures.Stack;
 
+import java.util.Arrays;
+
 public class ArrayStack implements Stack {
 
   private Object[] arr;
@@ -12,8 +14,14 @@ public class ArrayStack implements Stack {
 
   @Override
   public Object push(Object element) {
+    if (this.size == this.arr.length) this.resizeArr();
+
     this.arr[this.size++] = element;
     return element;
+  }
+
+  private void resizeArr() {
+    this.arr = Arrays.copyOf(this.arr, this.arr.length << 1);
   }
 
   @Override

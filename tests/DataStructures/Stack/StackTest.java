@@ -8,6 +8,7 @@ import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -32,8 +33,8 @@ public class StackTest {
     this.stack = (Stack) obj;
   }
 
-  @Before
-  public void setUp() {
+  @After
+  public void tearDown() {
     this.clearStack();
   }
 
@@ -41,6 +42,17 @@ public class StackTest {
     while (this.stack.size() > 0) {
       this.stack.pop();
     }
+  }
+
+  private Integer[] getRandomIntegerArray(int numElements) {
+    Random r = new Random();
+    Integer[] arr = new Integer[numElements];
+
+    for (int i = 0; i < numElements; i++) {
+      arr[i] = r.nextInt();
+    }
+
+    return arr;
   }
 
   /**
@@ -77,17 +89,17 @@ public class StackTest {
 
   @Test
   public void addOneElementToStack() {
-    fillAndCheckStack(new Object[]{10});
+    fillAndCheckStack(getRandomIntegerArray(1));
   }
 
   @Test
   public void addTwoElementsToStack() {
-    fillAndCheckStack(new Object[]{27, 30});
+    fillAndCheckStack(getRandomIntegerArray(2));
   }
 
   @Test
   public void addMultipleElementsToStack() {
-    fillAndCheckStack(new Object[]{17, 102, 50});
+    fillAndCheckStack(getRandomIntegerArray(100));
   }
 
   @Test
@@ -106,7 +118,7 @@ public class StackTest {
 
   @Test
   public void popOnMultipleElementStack() {
-    Object[] objects = new Object[]{3, 304, 102, 11, 207, 190};
+    Object[] objects = getRandomIntegerArray(100);
 
     fillAndCheckStack(objects);
     popAllPassedElementsFromStackAndCheck(objects);
