@@ -1,6 +1,6 @@
 package DataStructures;
 
-public interface Collection {
+public interface Collection<E> {
 
   int size();
 

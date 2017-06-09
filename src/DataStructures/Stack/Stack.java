@@ -2,7 +2,7 @@ package DataStructures.Stack;
 
 import DataStructures.Collection;
 
-public interface Stack<E> extends Collection {
+public interface Stack<E> extends Collection<E> {
 
   E push(E element);
 

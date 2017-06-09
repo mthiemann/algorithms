@@ -2,7 +2,7 @@ package DataStructures.Heap;
 
 import DataStructures.Collection;
 
-public interface Heap<E extends Comparable<E>> extends Collection {
+public interface Heap<E extends Comparable<E>> extends Collection<E> {
 
   void push(E element);
 
