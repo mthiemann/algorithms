@@ -1,13 +1,14 @@
-package DataStructures;
+package DataStructures.Heap;
 
-import static org.junit.Assert.*;
-import org.junit.Test; // for @Test
-import org.junit.Before; // for @Before
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class HeapTest {
+import static org.junit.Assert.*;
+
+public class ArrayHeapTest {
 
   public class MinHeapComparator implements Comparator<Integer> {
 
@@ -32,9 +33,9 @@ public class HeapTest {
 
   @Before
   public void setUp() {
-    naturalOrderingHeap = new Heap<Integer>();
-    minHeap = new Heap<Integer>(new MinHeapComparator());
-    maxHeap = new Heap<Integer>(new MaxHeapComparator());
+    naturalOrderingHeap = new ArrayHeap<>();
+    minHeap = new ArrayHeap<>(new ArrayHeapTest.MinHeapComparator());
+    maxHeap = new ArrayHeap<>(new ArrayHeapTest.MaxHeapComparator());
 
     heaps = new ArrayList<>();
     heaps.add(naturalOrderingHeap);

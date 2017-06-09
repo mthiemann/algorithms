@@ -1,9 +1,12 @@
-package DataStructures;
+package DataStructures.Heap;
+
+import DataStructures.Collection;
 
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class Heap<E extends Comparable<E>> {
+@SuppressWarnings("unchecked")
+public class ArrayHeap<E extends Comparable<E>> implements Heap<E> {
 
   private static int startLength = 10;
 
@@ -11,21 +14,26 @@ public class Heap<E extends Comparable<E>> {
   private int size;
   private Comparator<E> comparator;
 
-  public Heap() {
-    this.arr = new Object[startLength];
-    this.size = 0;
+  public ArrayHeap() {
+    initHeap();
   }
 
-  public Heap(Comparator<E> comparator) {
+  public ArrayHeap(Comparator<E> comparator) {
     this();
     this.comparator = comparator;
+  }
+
+  private void initHeap() {
+    this.arr = new Object[startLength];
+    this.size = 0;
   }
 
   /**
    * Add element to the heap
    * @param el
    */
-  public void push(int el) {
+  @Override
+  public void push(E el) {
     // if array too small -> resize
     if (this.size >= this.arr.length) this.resize();
 
@@ -40,6 +48,7 @@ public class Heap<E extends Comparable<E>> {
    * Return max element without removing it
    * @return
    */
+  @Override
   public E peek() {
     return (this.size > 0) ? (E)this.arr[0] : null;
   }
@@ -48,6 +57,7 @@ public class Heap<E extends Comparable<E>> {
    * Return and remove max element
    * @return
    */
+  @Override
   public E poll() {
 
     if (this.size == 0) {
@@ -68,6 +78,7 @@ public class Heap<E extends Comparable<E>> {
     return first;
   }
 
+  @Override
   public boolean remove(E element) {
 
     if (this.size == 0) return false;
@@ -165,9 +176,16 @@ public class Heap<E extends Comparable<E>> {
     }
   }
 
+  @Override
   public int size() {
     return this.size;
   }
+
+  @Override
+  public void clear() { this.initHeap(); }
+
+  @Override
+  public boolean isEmpty() { return this.size == 0; }
 
   private int getParentIdx(int idx) {
     return (int) Math.floor((idx - 1) / 2);
