@@ -10,6 +10,10 @@ public class BST<E extends Comparable<E>> implements Tree<E> {
   int size;
 
   BST() {
+    this.initBST();
+  }
+
+  private void initBST() {
     this.root = null;
     this.size = 0;
   }
@@ -109,9 +113,16 @@ public class BST<E extends Comparable<E>> implements Tree<E> {
     return false;
   }
 
+  @Override
   public int size() {
     return this.size;
   }
+
+  @Override
+  public void clear() { this.initBST(); }
+
+  @Override
+  public boolean isEmpty() { return this.size == 0; }
 
   public E getMax() {
     if (this.root == null) return null;

@@ -2,7 +2,7 @@ package DataStructures.Trees;
 
 import DataStructures.Collection;
 
-public interface Tree<E extends Comparable<E>> {
+public interface Tree<E extends Comparable<E>> extends Collection {
 
   class Node<E> {
 
