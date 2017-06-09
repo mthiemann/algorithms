@@ -2,18 +2,19 @@ package DataStructures.Stack;
 
 import java.util.Arrays;
 
-public class ArrayStack implements Stack {
+@SuppressWarnings("unchecked")
+public class ArrayStack<E> implements Stack<E> {
 
   private Object[] arr;
   private int size;
 
-  public ArrayStack() {
+  ArrayStack() {
     this.arr = new Object[10];
     this.size = 0;
   }
 
   @Override
-  public Object push(Object element) {
+  public E push(E element) {
     if (this.size == this.arr.length) this.resizeArr();
 
     this.arr[this.size++] = element;
@@ -25,19 +26,19 @@ public class ArrayStack implements Stack {
   }
 
   @Override
-  public Object peek() {
-    return this.arr[this.size - 1];
+  public E peek() {
+    return (E)this.arr[this.size - 1];
   }
 
   @Override
-  public Object pop() {
+  public E pop() {
 
     if (this.isEmpty()) return null;
 
     Object o = this.arr[this.size - 1];
     this.arr[this.size - 1] = null;
     this.size--;
-    return o;
+    return (E)o;
   }
 
   @Override
@@ -60,8 +61,18 @@ public class ArrayStack implements Stack {
     return this.size;
   }
 
-  boolean isEmpty() {
+  @Override
+  public boolean isEmpty() {
     return this.size() == 0;
+  }
+
+  @Override
+  public void clear() {
+    for (int i = 0; i < this.size; i++) {
+      this.arr[i] = null;
+    }
+
+    this.size = 0;
   }
 }
 

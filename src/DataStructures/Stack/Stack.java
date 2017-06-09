@@ -1,14 +1,14 @@
 package DataStructures.Stack;
 
-public interface Stack {
+import DataStructures.Collection;
 
-  Object push(Object element);
+public interface Stack<E> extends Collection {
 
-  Object pop();
+  E push(E element);
 
-  Object peek();
+  E pop();
 
-  int search(Object element);
+  E peek();
 
-  int size();
+  int search(E element);
 }

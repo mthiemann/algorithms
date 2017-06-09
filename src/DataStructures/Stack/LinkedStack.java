@@ -1,6 +1,7 @@
 package DataStructures.Stack;
 
-public class LinkedStack implements Stack {
+@SuppressWarnings("unchecked")
+public class LinkedStack<E> implements Stack<E> {
 
   private Node top;
   private int size;
@@ -17,13 +18,17 @@ public class LinkedStack implements Stack {
     }
   }
 
-  public LinkedStack() {
+  LinkedStack() {
+    this.initStack();
+  }
+
+  private void initStack() {
     this.top = new Node();
     this.size = 0;
   }
 
   @Override
-  public Object push(Object element) {
+  public E push(E element) {
 
     if (this.top.element == null) {
       this.top.element = element;
@@ -37,12 +42,12 @@ public class LinkedStack implements Stack {
   }
 
   @Override
-  public Object peek() {
-    return this.top.element;
+  public E peek() {
+    return (E)this.top.element;
   }
 
   @Override
-  public Object pop() {
+  public E pop() {
     Object element = this.top.element;
 
     if (this.top.child != null) {
@@ -53,7 +58,7 @@ public class LinkedStack implements Stack {
 
     if (element != null) this.size--;
 
-    return element;
+    return (E)element;
   }
 
   @Override
@@ -82,7 +87,13 @@ public class LinkedStack implements Stack {
     return this.size;
   }
 
-  boolean isEmpty() {
+  @Override
+  public boolean isEmpty() {
     return this.size() == 0;
+  }
+
+  @Override
+  public void clear() {
+    this.initStack();
   }
 }
