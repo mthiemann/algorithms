@@ -18,6 +18,10 @@ public class MapEntry<K, V> {
     return this.value;
   }
 
+  void setValue(V value) {
+    this.value = value;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
