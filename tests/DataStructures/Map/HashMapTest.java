@@ -14,12 +14,12 @@ public class HashMapTest {
 
   private HashMap<Integer, Integer> hm;
 
-  private static Integer[] smallArrayWithKeys = new Integer[]{3, 100, 2, 7, 6};
-  private static Integer[] smallArrayWithValues = new Integer[]{5, 7, 11, 2, 1};
+  private static Integer[] smallArrayWithKeys = new Integer[]{100, 2, 7, 6, null};
+  private static Integer[] smallArrayWithValues = new Integer[]{7, null, 2, 1, 14};
   private static Integer nonExistingKeyInSmallArray = 8;
 
-  private static Integer[] bigArrayWithKeys = new Integer[]{200, 11, 23, 4, 9, 600, 101, 2, 3};
-  private static Integer[] bigArrayWithValues = new Integer[]{1, 20, 8, 7, 900, 1100, 54, 32, 6};
+  private static Integer[] bigArrayWithKeys = new Integer[]{200, 11, 23, null, 9, 600, 101, 2, 3};
+  private static Integer[] bigArrayWithValues = new Integer[]{1, 20, 8, null, 900, 1100, null, 32, 6};
 
   private static Integer[] twoDistinctKeysForDuplicateValues = new Integer[]{234, 767};
   private static Integer[] twoDuplicateValues = new Integer[]{90, 90};
@@ -46,10 +46,13 @@ public class HashMapTest {
   private void fillHashMap(Integer[] keys, Integer[] values) {
 
     this.checkSameLength(keys, values);
+    int initialSize = this.hm.size();
+    int uniqueElementsAdded = 0;
 
     for (int i = 0; i < keys.length; i++) {
+      if (!this.hm.containsKey(keys[i])) uniqueElementsAdded++;
       this.hm.put(keys[i], values[i]);
-      assertEquals(this.hm.size(), i + 1);
+      assertEquals(this.hm.size(), initialSize + uniqueElementsAdded);
     }
   }
 
@@ -72,18 +75,23 @@ public class HashMapTest {
   }
 
   /**
-   * Removes the passed keys from the HashMap
+   * Removes the passed keys from the HashMap and compares the returned value with the corresponding
+   * value of the passed values array
    * Checks the size, contains key and contains value after every removal of an element
    * @param keys
+   * @param values
    */
-  private void removeFromHashMap(Integer[] keys) {
+  private void removeFromHashMap(Integer[] keys, Integer[] values) {
+
+    this.checkSameLength(keys, values);
 
     int initialSize = this.hm.size();
 
     // check if array is bigger than the HashMap
     if (keys.length > initialSize) {
       throw new IllegalArgumentException("The number of passed keys exceeds " +
-        "the number of elements in the HashMap!");
+        "the number of elements in the HashMap! (Max: " + initialSize +
+        ", Received: " + keys.length + ")");
     }
 
     // check for duplicate keys
@@ -99,11 +107,12 @@ public class HashMapTest {
     for (int i = 0; i < keys.length; i++) {
       Integer value = this.hm.remove(keys[i]);
 
+      assertEquals(value, values[i]);
       assertEquals(this.hm.size(), initialSize - 1 - i); // check size
       assertFalse(this.hm.containsKey(keys[i])); // check contains key
 
       // check contains value
-      int newFrequency = valueToFrequency.get(value) - 1;
+      Integer newFrequency = valueToFrequency.get(value) - 1;
       valueToFrequency.put(value, newFrequency);
       if (newFrequency == 0) {
         assertFalse(this.hm.containsValue(value));
@@ -136,8 +145,8 @@ public class HashMapTest {
       Integer expectedValue = (exists) ? values[i] : null;
 
       assertEquals(this.hm.get(keys[i]), expectedValue);
-      assertTrue(this.hm.containsKey(keys[i]));
-      assertTrue(this.hm.containsValue(values[i]));
+      assertTrue(containsKey);
+      assertTrue(containsValue);
     }
   }
 
@@ -152,20 +161,20 @@ public class HashMapTest {
   }
 
   /**
-   * Checks that the values in the HashMap equal the values passed to this function
-   * (The values must all exist and have the same frequency)
-   * (expects no other values in the map than the passed input values)
+   * Checks that the frequency of the passed values equals the frequency of the values in the HM
    * @param inputValues
    */
-  private void checkValues(Integer[] inputValues) {
-    HashMap<Integer, Integer> inputValueToFrequency = this.getFrequencyOfValues(new ArrayList<>(Arrays.asList(inputValues)));
-    HashMap<Integer, Integer> hmValueToFrequency = this.getFrequencyOfValues(this.hm.values());
+  private void checkFrequencyOfValues(Integer[] inputValues) {
 
-    assertEquals(inputValueToFrequency.size(), hmValueToFrequency.size()); // same size
+    ArrayList<Integer> inputValuesArrayList = new ArrayList<>(Arrays.asList(inputValues));
+    ArrayList<Integer> hmValuesArrayList = this.hm.values();
 
-    // the occurrences for all value match
-    for (MapEntry<Integer, Integer> entry: hmValueToFrequency.entrySet()) {
-      assertEquals(entry.getValue(), inputValueToFrequency.get(entry.getKey()));
+    HashMap<Integer, Integer> inputValueToFrequency = this.getFrequencyOfValues(inputValuesArrayList);
+    HashMap<Integer, Integer> hmValueToFrequency = this.getFrequencyOfValues(hmValuesArrayList);
+
+    // the occurrences for all values match
+    for (MapEntry<Integer, Integer> entry: inputValueToFrequency.entrySet()) {
+      assertEquals(entry.getValue(), hmValueToFrequency.get(entry.getKey()));
     }
   }
 
@@ -180,7 +189,7 @@ public class HashMapTest {
     HashSet<MapEntry<Integer, Integer>> inputSet = new HashSet<>(inputKeys.length);
 
     for (int i = 0; i < inputKeys.length; i++) {
-      inputSet.add(new MapEntry<Integer, Integer>(inputKeys[i], inputValues[i]));
+      inputSet.add(new MapEntry<>(inputKeys[i], inputValues[i]));
     }
 
     assertTrue(hmSet.equals(inputSet));
@@ -194,12 +203,11 @@ public class HashMapTest {
   @Test
   public void testGetForNonExistingElement() {
     this.fillHashMap(HashMapTest.smallArrayWithKeys, HashMapTest.smallArrayWithValues);
-    assertEquals(HashMapTest.nonExistingKeyInSmallArray, null);
+    assertEquals(this.hm.get(HashMapTest.nonExistingKeyInSmallArray), null);
   }
 
   @Test
   public void testMappingWithoutResize() {
-    // add key-value pairs, retrieve and compare
     this.fillHashMap(HashMapTest.smallArrayWithKeys, HashMapTest.smallArrayWithValues);
     this.checkMapping(HashMapTest.smallArrayWithKeys, HashMapTest.smallArrayWithValues, true);
   }
@@ -225,13 +233,13 @@ public class HashMapTest {
   @Test
   public void testValuesWithoutResize() {
     this.fillHashMap(HashMapTest.smallArrayWithKeys, HashMapTest.smallArrayWithValues);
-    this.checkValues(HashMapTest.smallArrayWithValues);
+    this.checkFrequencyOfValues(HashMapTest.smallArrayWithValues);
   }
 
   @Test
   public void testValuesAfterResize() {
     this.fillHashMap(HashMapTest.bigArrayWithKeys, HashMapTest.bigArrayWithValues);
-    this.checkValues(HashMapTest.bigArrayWithValues);
+    this.checkFrequencyOfValues(HashMapTest.bigArrayWithValues);
   }
 
   @Test
@@ -249,7 +257,7 @@ public class HashMapTest {
   @Test
   public void testRemoveForExistingElements() {
     this.fillHashMap(HashMapTest.smallArrayWithKeys, HashMapTest.smallArrayWithValues);
-    this.removeFromHashMap(HashMapTest.smallArrayWithKeys);
+    this.removeFromHashMap(HashMapTest.smallArrayWithKeys, HashMapTest.smallArrayWithValues);
   }
 
   @Test
@@ -267,6 +275,7 @@ public class HashMapTest {
   public void testClear() {
     this.fillHashMap(HashMapTest.smallArrayWithKeys, HashMapTest.smallArrayWithValues);
     this.hm.clear();
+
     this.checkMapping(HashMapTest.smallArrayWithKeys, HashMapTest.smallArrayWithValues, false);
     assertTrue(this.hm.isEmpty());
   }
@@ -274,13 +283,17 @@ public class HashMapTest {
   @Test
   public void testIsEmpty() {
     assertTrue(this.hm.isEmpty()); // initial state: no values
-    this.hm.put(3, 7);
+
+    this.hm.put(HashMapTest.nonExistingKeyInSmallArray, 7);
     assertFalse(this.hm.isEmpty()); // edge case: one value
+
     this.fillHashMap(HashMapTest.smallArrayWithKeys, HashMapTest.smallArrayWithValues);
     assertFalse(this.hm.isEmpty()); // after inserting multiple values
-    this.hm.remove(3);
+
+    this.hm.remove(HashMapTest.nonExistingKeyInSmallArray);
     assertFalse(this.hm.isEmpty()); // after one removal operation
-    this.removeFromHashMap(HashMapTest.smallArrayWithKeys);
+
+    this.removeFromHashMap(HashMapTest.smallArrayWithKeys, HashMapTest.smallArrayWithValues);
     assertTrue(this.hm.isEmpty()); // after removing all values
   }
 
@@ -312,6 +325,12 @@ public class HashMapTest {
     // fill with another five duplicate values
     Integer valueWithFiveOccurrences = HashMapTest.fiveDuplicateValues[0];
     this.fillHashMap(HashMapTest.fiveDistinctKeysForDuplicateValues, HashMapTest.fiveDuplicateValues);
+
+    this.fillHashMap(HashMapTest.bigArrayWithKeys, HashMapTest.bigArrayWithValues);
+
+    this.checkFrequencyOfValues(HashMapTest.fiveDuplicateValues);
+    this.checkFrequencyOfValues(HashMapTest.twoDuplicateValues);
+    this.checkFrequencyOfValues(HashMapTest.bigArrayWithValues);
 
     HashMap<Integer, Integer> valueToFrequency = this.getFrequencyOfValues(this.hm.values());
     assertEquals((int)valueToFrequency.get(valueWithTwoOccurrences), 2);
