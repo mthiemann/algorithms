@@ -10,8 +10,10 @@ From scratch implementations of common data structures in Java including complex
 
 Data Structure | Implementation | Test | Add | Access | Delete | Optimized For
 --- | --- | --- | --- | --- | --- | ---
-Heap | [Heap.java](src/DataStructures/Heap.java) | [HeapTest.java](tests/DataStructures/HeapTest.java) | O(log N) | O(N) | O(N) | O(1) Peek <br> max (Max Heap) <br> min (Min Heap)
-Stack | [Stack](src/DataStructures/Stack) | [StackTest.java](tests/DataStructures/Stack/StackTest.java) | O(1) | O(N) | O(N) | Get last inserted in O(1)
+Heap | [Java](src/DataStructures/Heap) | [Java](tests/DataStructures/Heap/ArrayHeapTest.java) | O(log N) | O(N) | O(N) | O(1) Peek <br> max (Max Heap) <br> min (Min Heap)
+Stack | [Java](src/DataStructures/Stack) | [Java](tests/DataStructures/Stack/StackTest.java) | O(1) | O(N) | O(N) | Get last inserted O(1)
+Queue | [Java](src/DataStructures/Queue) | [Java](tests/DataStructures/Queue/DequeTest.java) | O(1) | O(N) | O(N) | Get first inserted O(1) <br> Deque: Get last inserted O(1)
+BST | [Java](src/DataStructures/Trees/BST.java) | [Java](tests/DataStructures/Trees/BSTTest.java) | O(N) | O(N) | O(N) | Dynamic insertion and fast retrieval
 
 
 ## Algorithms
